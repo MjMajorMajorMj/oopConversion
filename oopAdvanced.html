@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script>
+	$(document).ready( handlePageLoad );
+	var currentValue = 0;
+
+	function handlePageLoad(){
+		//push the following into the adjustableInputObjects array: 
+			//make a new AdjustableInput object, give it parameter of "#input1" and an initial value of 3
+			//make a new AdjustableInput object, give it parameter of "#input2" and an initial value of -10	
+			//make a new AdjustableInput object, give it parameter of "#input3" and an initial value of 20
+	
+	}
+
+class AdjustableInput{
+	constructor( parentContainer, initialValue ){
+		this.value = initialValue;
+		this.parts = {
+			parentContainer: $(parentContainer),
+			upArrow: null,
+			downArrow: null, 
+			display: null
+		};
+		this.grabChildrenElements();
+		this.displayCurrentValue();
+		
+	}
+	grabChildrenElements(){
+		this.parts.upArrow = this.parts.parentContainer.find('.up');
+		this.parts.downArrow = this.parts.parentContainer.find('.down');
+		this.parts.display = this.parts.parentContainer.find('.display');
+	}
+	displayCurrentValue(){
+		this.parts.display.text( this.value );
+	}
+	assignEventHandlers(){
+		var thisObject = this;
+		var boundUpHandler = this.clickHandler.bind(thisObject, 1);
+		var boundDownHandler = this.clickHandler.bind(thisObject, -1);
+		this.parts.upArrow.on('click', boundUpHandler);
+		this.parts.downArrow.on('click', boundDownHandler);
+	}
+	clickHandler(direction){
+		this.adjustValue(direction);
+		this.displayCurrentValue();
+	}
+	adjustValue( deltaValue ){
+		this.value += deltaValue;
+	}
+
+
+}
+</script>
+</head>
+<body>
+<div class="inputArea">
+	<input type="text" name="" class="display">
+	<nav class="up"></nav>
+	<nav class="down"></nav>
+</div>
+</body>
+</html>

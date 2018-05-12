@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script>
+	$(document).ready( handlePageLoad );
+	var adjustableInputObjects = [];
+
+	function handlePageLoad(){
+		//push the following into the adjustableInputObjects array: 
+			//make a new AdjustableInput object, give it parameter of "#input1" and an initial value of 3
+			//make a new AdjustableInput object, give it parameter of "#input2" and an initial value of -10	
+			//make a new AdjustableInput object, give it parameter of "#input3" and an initial value of 20
+	}
+
+class AdjustableInput{
+	constructor( parentContainer, initialValue ){
+		this.value = initialValue;
+		this.parentContainer = parentContainer;
+		this.upArrow = $(parentContainer).find('.up');
+		this.downArrow = $(parentContainer).find('.down');
+		this.display = $(parentContainer).find('.display');
+		this.display.text( this.value ); //assign the value of this.value to the display
+	}
+	assignEventHandlers(){
+		var thisObject = this;
+		var boundClickHandler = this.clickHandler.bind(thisObject);
+		this.upArrow.on('click', boundUpHandler);
+		this.downArrow.on('click', boundDownHandler);
+	}
+	clickHandler(){
+		if( $(event.target).hasClass('up') ){
+			this.initialValue++;
+		} else {
+			this.initialValue--;
+		}
+		this.parts.display.text( this.value );
+		this.displayCurrentValue();
+	}
+}
+</script>
+</head>
+<body>
+<div class="inputArea" id="input1">
+	<input type="text" name="" class="display">
+	<nav class="up"></nav>
+	<nav class="down"></nav>
+</div>
+<div class="inputArea" id="input2">
+	<input type="text" name="" class="display">
+	<nav class="up"></nav>
+	<nav class="down"></nav>
+</div>
+<div class="inputArea" id="input3">
+	<input type="text" name="" class="display">
+	<nav class="up"></nav>
+	<nav class="down"></nav>
+</div>
+</body>
+</html>
